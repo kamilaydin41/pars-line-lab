@@ -1,13 +1,16 @@
-# PARS LINE LAB v0.1.0
+# PARS LINE LAB v0.2.0
 
-Configurable 2D line follower robot simulator prototype.
+Line-following robot simulator prototype. Built with React and Vite.
 
-## Features
-- Canvas robot illustration with chassis, wheels, motor block and configurable sensor array.
-- Selectable sensor counts (3, 5, 6, 8, 10, 12, 16), sensor type and array width.
-- Independent left/right RPM sliders, chassis size and wheel diameter settings.
-- Four preset tracks.
-- Start/resume, pause and reset controls, elapsed timer and simulation speed.
+## v0.2.0
+- Live simulated sensor sampling against the track centerline.
+- Visual sensor LED states on the robot and sensor status panel.
+- Analog-style numeric readings and digital display mode.
+- Configurable sensor count and array width.
+- Configurable track presets, chassis, wheel and motor RPM.
+- Pause, resume, reset and speed control.
+
+**Current limitation:** sensors are visualized and sampled, but do not yet control the robot's movement. Closed-loop sensor/motor control is planned for a later release.
 
 ## Run locally
 ```bash
@@ -20,4 +23,4 @@ npm run dev
 npm run build
 ```
 
-This initial release is a visual motion prototype: hardware settings alter the model and display, while the robot follows preset waypoint paths. Sensor-based closed-loop control and realistic differential-drive physics are planned for later versions.
+Deploy via GitHub integration on Vercel. Framework preset: Vite; output directory: `dist`.
