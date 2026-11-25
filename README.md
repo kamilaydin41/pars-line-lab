@@ -1,14 +1,23 @@
 # PARS LINE LAB v0.1.0
 
-## Local setup
-1. Install Node.js LTS.
-2. Extract this folder and open it in VS Code.
-3. In the VS Code terminal run: `npm install`
-4. Run: `npm run dev`
-5. Open the localhost address Vite prints.
+Configurable 2D line follower robot simulator prototype.
+
+## Features
+- Canvas robot illustration with chassis, wheels, motor block and configurable sensor array.
+- Selectable sensor counts (3, 5, 6, 8, 10, 12, 16), sensor type and array width.
+- Independent left/right RPM sliders, chassis size and wheel diameter settings.
+- Four preset tracks.
+- Start/resume, pause and reset controls, elapsed timer and simulation speed.
+
+## Run locally
+```bash
+npm install
+npm run dev
+```
 
 ## Build
-`npm run build`
+```bash
+npm run build
+```
 
-## Vercel
-Push the folder to a GitHub repository and import it into Vercel. Framework preset: Vite; build command `npm run build`; output directory `dist`.
+This initial release is a visual motion prototype: hardware settings alter the model and display, while the robot follows preset waypoint paths. Sensor-based closed-loop control and realistic differential-drive physics are planned for later versions.
