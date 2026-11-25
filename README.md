@@ -1,26 +1,18 @@
-# PARS LINE LAB v0.2.0
+# PARS LINE LAB v0.3.0
 
-Line-following robot simulator prototype. Built with React and Vite.
+Çizgi izleyen robot simülatörü.
 
-## v0.2.0
-- Live simulated sensor sampling against the track centerline.
-- Visual sensor LED states on the robot and sensor status panel.
-- Analog-style numeric readings and digital display mode.
-- Configurable sensor count and array width.
-- Configurable track presets, chassis, wheel and motor RPM.
-- Pause, resume, reset and speed control.
+## v0.3.0
+- Gerçek yarışma pistlerinden esinlenen 5 hazır parkur
+- Siyah zemin üzerinde beyaz çizgi / beyaz zemin üzerinde siyah çizgi seçimi
+- Pist biçimleri ve çizgi kontrastı yapılandırılabilir
+- v0.2.0 sensör görselleştirmesi, robot ve motor yapılandırmaları korunmuştur
 
-**Current limitation:** sensors are visualized and sampled, but do not yet control the robot's movement. Closed-loop sensor/motor control is planned for a later release.
+## Yaygın gerçek pist standartlarına dayalı araştırma notları
+- MEB 2026 temel çizgi izleyen kategorisi: siyah zemin, beyaz çizgi.
+- MEB hızlı çizgi izleyen: siyah yüzey, beyaz çizgi ve bazı bölümlerde çizgisiz alanlar.
+- RobotChallenge çizgi izleyen: beyaz zemin, 15 mm siyah çizgi, keskin dönüşler ve hairpin örnekleri.
+- Birçok yarışma siyah-beyaz kontrastlı çizgiler kullanır; simülatörde her iki yön de seçilebilir.
 
-## Run locally
-```bash
-npm install
-npm run dev
-```
-
-## Build
-```bash
-npm run build
-```
-
-Deploy via GitHub integration on Vercel. Framework preset: Vite; output directory: `dist`.
+## Kurulum
+`npm install` ardından `npm run dev`.
