@@ -1,8 +1,16 @@
-# PARS LINE LAB v0.3.1
+# PARS LINE LAB v0.3.3
 
-Robot model updated to use the supplied top-view PNG asset. The robot image rotates to follow the selected track segment. Virtual sensor LEDs are overlaid on the robot image.
+## v0.3.3 – PID-benzeri sensör kontrollü hareket
+- Robotun ön (burun) tarafı, tekerleklerin karşı tarafı olarak sensör dizisinin konumunda örneklenir.
+- Robot artık waypoint interpolasyonu ile pistte zorla ilerletilmez. Sensör çizgi yakınlık değerleri bir ağırlıklı hata üretir.
+- Eğitsel P/I/D-benzeri kontrol, diferansiyel motor hızlarını ayarlayarak robot yönünü düzeltir.
+- Çizgi kaybında son algılama yönünde basit arama davranışı uygulanır.
+- RPM, teker çapı, şasi genişliği, simülasyon hızı ve sensör sayısı model hareketini etkiler.
 
-## Publish
-Upload the extracted project files to the existing GitHub repository and commit as `PARS LINE LAB v0.3.1 - supplied robot image`. Vercel will deploy automatically.
+## GitHub/Vercel
+GitHub repository'ye bu proje dosyalarını yükleyip commit edin. Vercel bağlı repository'den otomatik deploy edecektir.
 
-Run locally: `npm install` then `npm run dev`.
+## Çalıştırma
+`npm install` ardından `npm run dev`.
+
+> Kontrol modeli eğitim amaçlı yaklaşık bir diferansiyel sürüş/PID-benzeri modeldir; gerçek robot dinamiklerinin kalibre edilmiş birebir simülasyonu değildir.
