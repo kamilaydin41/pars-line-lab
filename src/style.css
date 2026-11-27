@@ -70,3 +70,12 @@ canvas{touch-action:none;cursor:grab}canvas:active{cursor:grabbing}.uploadLabel{
   .stage > aside { grid-template-columns: 1fr; }
   .stage > aside > .panel:first-child, .stage > aside > .panel:has(.codeEditor), .stage > aside > .panel.info { grid-column: auto; }
 }
+
+/* v0.4.11: explicitly place all settings beneath the simulator/sensor section */
+main { display: grid; grid-template-columns: minmax(0, 1fr); }
+main > .stage { width: 100%; min-width: 0; }
+main > aside { width: 100%; margin-top: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+main > aside > .panel { margin: 0; min-width: 0; height: fit-content; }
+main > aside > .panel:has(.codeEditor), main > aside > .panel.info, main > aside > .panel:has(.pidGraph) { grid-column: 1 / -1; }
+@media(max-width:1050px) { main > aside { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width:620px) { main > aside { grid-template-columns: 1fr; } main > aside > .panel:has(.codeEditor), main > aside > .panel.info, main > aside > .panel:has(.pidGraph) { grid-column: auto; } }
