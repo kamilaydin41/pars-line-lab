@@ -11,7 +11,15 @@ const initialRobot = (trackKey) => { const p=tracks[trackKey].points, a=p[0],b=p
 const distanceToSegment=(px,py,ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay,l=dx*dx+dy*dy;let t=l?((px-ax)*dx+(py-ay)*dy)/l:0;t=Math.max(0,Math.min(1,t));return Math.hypot(px-(ax+t*dx),py-(ay+t*dy));};
 function App(){
  const canvasRef=useRef(null),robotRef=useRef(initialRobot('oval')),robotImageRef=useRef(null),pidRef=useRef({integral:0,previous:0,lastSeen:0,lostFrames:0,filteredDerivative:0}),latestSensorsRef=useRef([]),trackImageRef=useRef(null),trackImageDataRef=useRef(null),dragRef=useRef(null),crossRef=useRef({previous:null,started:false}),canvasMetricsRef=useRef({w:1,h:1,offsetX:0,offsetY:0,imageScale:1});
- const [running,setRunning]=useState(false),[speed,setSpeed]=useState(1),[elapsed,setElapsed]=useState(0),[track,setTrack]=useState('oval'),[trackScheme,setTrackScheme]=useState('whiteLine'),[sensorCount,setSensorCount]=useState(8),[sensorType,setSensorType]=useState('Analog'),[sensorWidth,setSensorWidth]=useState(70),[leftRPM,setLeftRPM]=useState(600),[rightRPM,setRightRPM]=useState(600),[wheelDiameter,setWheelDiameter]=useState(32),[chassisWidth,setChassisWidth]=useState(90),[chassisLength,setChassisLength]=useState(110),[sensorValues,setSensorValues]=useState([]),[kp,setKp]=useState(1.8),[ki,setKi]=useState(.02),[kd,setKd]=useState(.24),[currentError,setCurrentError]=useState(0),[pidTerms,setPidTerms]=useState({p:0,i:0,d:0,out:0}),[errorHistory,setErrorHistory]=useState([]),[uploadedTrackName,setUploadedTrackName]=useState(''),[customTrack,setCustomTrack]=useState(false),[placeRobot,setPlaceRobot]=useState(false),[setStartLineMode,setSetStartLineMode]=useState(false),[startLine,setStartLine]=useState({x:.5,y:.5,angle:0}),[headingDeg,setHeadingDeg]=useState(0),[timerStarted,setTimerStarted]=useState(false),const [arduinoCode,setArduinoCode]=useState(`#include <QTRSensors.h>
+ const [running,setRunning]=useState(false),[speed,setSpeed]=useState(1),[elapsed,setElapsed]=useState(0),[track,setTrack]=useState('oval'),[trackScheme,setTrackScheme]=useState('whiteLine'),[sensorCount,setSensorCount]=useState(8),[sensorType,setSensorType]=useState('Analog'),[sensorWidth,setSensorWidth]=useState(70),[leftRPM,setLeftRPM]=useState(600),[rightRPM,setRightRPM]=useState(600),[wheelDiameter,setWheelDiameter]=useState(32),[chassisWidth,setChassisWidth]=useState(90),[chassisLength,setChassisLength]=useState(110),[sensorValues,setSensorValues]=useState([]),[kp,setKp]=useState(1.8),[ki,setKi]=useState(.02),[kd,setKd]=useState(.24),[currentError,setCurrentError]=useState(0),[pidTerms,setPidTerms]=useState({p:0,i:0,d:0,out:0}),[errorHistory,setErrorHistory]=useState([]),[uploadedTrackName,setUploadedTrackName]=useState(''),[customTrack,setCustomTrack]=useState(false),[placeRobot,setPlaceRobot]=useState(false),[setStartLineMode,setSetStartLineMode]=useState(false),[startLine,setStartLine]=useState({x:.5,y:.5,angle:0}),[headingDeg,setHeadingDeg]=useState(0),[timerStarted,setTimerStarted]=useState(false),[controllerMode,setControllerMode]=useState('builtin'),[customCode,setCustomCode]=useState(`// ctx.error: normalized line error (-1..1)
+// ctx.sensors: sensor objects with onLine, strength, value, luminance
+// ctx.dt: frame time in seconds
+// Return normalized motor commands (-1..1).
+function controller(ctx) {
+  const correction = Math.max(-1, Math.min(1, ctx.error * 1.4));
+  return { left: 0.72 - correction * 0.45, right: 0.72 + correction * 0.45 };
+}`),[codeStatus,setCodeStatus]=useState('');
+ const [arduinoCode,setArduinoCode]=useState(`#include <QTRSensors.h>
 
 QTRSensors qtr;
 const uint8_t SensorCount = 8;
@@ -51,14 +59,7 @@ void loop() {
   analogWrite(leftMotorPWM, leftSpeed);
   analogWrite(rightMotorPWM, rightSpeed);
 }
-`),[controllerMode,setControllerMode]=useState('builtin'),[customCode,setCustomCode]=useState(`// ctx.error: normalized line error (-1..1)
-// ctx.sensors: sensor objects with onLine, strength, value, luminance
-// ctx.dt: frame time in seconds
-// Return normalized motor commands (-1..1).
-function controller(ctx) {
-  const correction = Math.max(-1, Math.min(1, ctx.error * 1.4));
-  return { left: 0.72 - correction * 0.45, right: 0.72 + correction * 0.45 };
-}`),[codeStatus,setCodeStatus]=useState('');
+`);
  const customControllerRef=useRef(null);const gainsRef=useRef({kp,ki,kd});useEffect(()=>{gainsRef.current={kp,ki,kd}},[kp,ki,kd]);useEffect(()=>{if(controllerMode==='custom'){try{customControllerRef.current=new Function(`${customCode}; return typeof controller==='function' ? controller : null;`)();setCodeStatus(customControllerRef.current?'Kod hazır':'controller(ctx) fonksiyonu bulunamadı.');}catch(err){customControllerRef.current=null;setCodeStatus('Kod hatası: '+err.message);}}else{customControllerRef.current=null;setCodeStatus('Yerleşik PID kontrolü aktif.');}},[controllerMode,customCode]);const runningRef=useRef(running);useEffect(()=>{runningRef.current=running},[running]);
  useEffect(()=>{const img=new Image();img.src='/robot.png';img.onload=()=>{robotImageRef.current=img;};},[]);
  useEffect(()=>{if(track==='custom')return;const r=initialRobot(track);robotRef.current=r;setHeadingDeg(r.angle*180/Math.PI);pidRef.current={integral:0,previous:0,lastSeen:0,lostFrames:0,filteredDerivative:0};crossRef.current={previous:null,started:false};setElapsed(0);setTimerStarted(false);setRunning(false);setSensorValues([]);const p=tracks[track].points;setStartLine({x:p[0][0],y:p[0][1],angle:Math.atan2(p[1][1]-p[0][1],p[1][0]-p[0][0])});},[track]);
