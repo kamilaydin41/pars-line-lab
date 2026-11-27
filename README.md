@@ -1,4 +1,4 @@
-# PARS LINE LAB v0.4.6
+# PARS LINE LAB v0.4.7
 
 Çizgi izleyen robot eğitim simülatörü.
 
@@ -45,3 +45,10 @@ npm run build
 - Sensor array sampling position is moved to a forward, near-center location on the robot, using rendered robot length as a scale reference.
 - Sensor array remains laterally centered for all supported sensor counts.
 - Sensor array span is clamped relative to robot width so higher sensor counts stay on the chassis.
+
+
+## v0.4.7 – Merkez sensör düz sürüş düzeltmesi
+- Tek merkez sensör (tek sayılı diziler) veya dengeli merkez çiftinin (çift sayılı diziler) çizgiyi algılaması halinde küçük hata değerleri sıfırlanır.
+- Merkezdeki okumalar PID integralini sıfırlar ve türev düzeltmesini kapatarak düz sürüşte birikmiş düzeltmenin devam etmesini önler.
+- Sensör hata deadband'i jitter'ı azaltacak şekilde genişletildi.
+- Sol/sağ motor RPM farkı, merkez hata sıfırken eşit teker hızına kompansasyon ile dengelenir.
