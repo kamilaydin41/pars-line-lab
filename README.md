@@ -1,8 +1,8 @@
-# PARS LINE LAB v0.4.1
+# PARS LINE LAB v0.4.2
 
 Çizgi izleyen robot simülatörü.
 
-## v0.4.1
+## v0.4.2
 - Sensör örnekleme robotun ilerleme yönünde, sensör barı boyunca dik yerleştirildi.
 - Çizgi algılayan sanal sensör LED'leri yeşil; algılamayanlar kırmızı.
 - PID-benzeri diferansiyel sürüşün yön/polaritesi düzeltildi.
