@@ -1,32 +1,35 @@
-# PARS LINE LAB v0.4.3
+# PARS LINE LAB v0.4.4
 
-Çizgi izleyen robot simülatörü.
+Çizgi izleyen robot eğitim simülatörü.
 
-## v0.4.3 yenilikleri
-- PNG, JPG veya WebP biçiminde dış pist görseli yükleme.
-- Robotu simülasyon alanında sürükleyerek veya yerleştirme düğmesiyle konumlandırma.
-- Robot yönünü açı kontrolüyle ayarlama.
-- Başlangıç çizgisini simülasyon alanına tıklayarak yerleştirme ve yönünü ayarlama.
-- Simülasyon süresi, robot başlangıç çizgisini ileri yönde geçince başlar.
-- Yüklenen pist görsellerinde sensör algılama, çizgi renk standardı seçimine göre piksel örnekleme yapar.
+## v0.4.4
+- Hazır T1-T5 pistleri kapalı döngü/tur parkurları olacak şekilde güncellendi.
+- Yerleşik otomatik PID kontrolü varsayılan kontrol modu olarak çalışır.
+- Robot Kontrol Kodları panelinden kullanıcı JavaScript `controller(ctx)` fonksiyonunu yazıp özel motor komutlarıyla simülasyonu kontrol edebilir.
+- Özel kontrol fonksiyonunun `{left, right}` döndürmesi beklenir; değerler -1 ile 1 arasında sınırlandırılır.
+- Kontrol panelleri sağ tarafta iki sütunlu kompakt düzen olarak sunulur; kod paneli tam genişlik kullanır.
+- v0.4.3'ten pist yükleme, robot konumlandırma ve start-line timer özellikleri korunmuştur.
 
-## Pist görseli
-Pist görselini simülasyon panelindeki **Dışarıdan pist resmi yükle** alanından seçin. Görsel en-boy oranı korunarak simülasyon alanına sığdırılır. Ardından çizgi standardını (siyah zemin/beyaz çizgi veya beyaz zemin/siyah çizgi) seçin.
+## Özel kontrol fonksiyonu örneği
 
-## Robotu yerleştirme
-Robotu doğrudan canvas üzerinde sürükleyebilir veya **Robotu piste tıklayarak yerleştir** düğmesini kullanabilirsiniz. Yönünü açı sliderı ile ayarlayın.
+```js
+function controller(ctx) {
+  const correction = Math.max(-1, Math.min(1, ctx.error * 1.4));
+  return { left: 0.72 - correction * 0.45, right: 0.72 + correction * 0.45 };
+}
+```
 
-## Sayaç
-Başlat düğmesi robotu hareket ettirir. Sayaç, robot başlangıç çizgisini belirtilen ileri yönde geçtiğinde çalışmaya başlar. Başlangıç çizgisi canvas'a tıklanarak taşınabilir ve açısı slider ile ayarlanabilir.
+`ctx` içinde `error`, `sensors`, `dt`, `integral`, `derivative` ve `previous` alanları bulunur.
 
-## Kurulum
+## Çalıştırma
+
 ```bash
 npm install
 npm run dev
 ```
 
-## Yayın
+## Build
+
 ```bash
 npm run build
 ```
-GitHub'a commit edildiğinde bağlı Vercel projesi otomatik deploy yapar.
