@@ -79,3 +79,19 @@ main > aside > .panel { margin: 0; min-width: 0; height: fit-content; }
 main > aside > .panel:has(.codeEditor), main > aside > .panel.info, main > aside > .panel:has(.pidGraph) { grid-column: 1 / -1; }
 @media(max-width:1050px) { main > aside { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media(max-width:620px) { main > aside { grid-template-columns: 1fr; } main > aside > .panel:has(.codeEditor), main > aside > .panel.info, main > aside > .panel:has(.pidGraph) { grid-column: auto; } }
+
+/* v0.4.15: remove error-history chart, compact simulator viewport, 5-column controls */
+canvas { height: min(48vh, 520px); min-height: 320px; }
+.stage { padding: 14px; }
+.stageHead p { font-size: 12px; }
+.sensorLive { padding: 10px; margin-top: 10px; }
+.sensorGrid { gap: 4px; }
+main > aside { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+main > aside > .panel { padding: 10px; }
+main > aside > .panel:has(.codeEditor), main > aside > .panel.info { grid-column: 1 / -1; }
+main > aside > .panel h3 { font-size: 13px; margin-bottom: 8px; }
+main > aside > .panel label { font-size: 11px; margin: 7px 0 3px; }
+main > aside > .panel .next { padding: 8px; font-size: 11px; }
+@media(max-width:1250px) { main > aside { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media(max-width:900px) { canvas { height: 50vh; min-height: 320px; } main > aside { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) { canvas { height: 42vh; min-height: 280px; } main > aside { grid-template-columns: 1fr; } main > aside > .panel:has(.codeEditor), main > aside > .panel.info { grid-column:auto; } }
