@@ -1,4 +1,4 @@
-# PARS LINE LAB v0.4.13
+# PARS LINE LAB v0.4.14
 
 ## Üç sütunlu kontrol paneli
 
@@ -17,4 +17,4 @@
 GitHub repository'ye proje dosyalarını yükleyip commit edin. Repository Vercel'e bağlıysa commit sonrası deployment otomatik başlar.
 
 
-Version v0.4.13 explicitly forces the main layout into one full-width simulation row followed by a full-width settings grid with three columns (two below 1050px, one below 620px). The header badge displays the version and layout fix.
+Version v0.4.14 explicitly forces the main layout into one full-width simulation row followed by a full-width settings grid with three columns (two below 1050px, one below 620px). The header badge displays the version and layout fix.
