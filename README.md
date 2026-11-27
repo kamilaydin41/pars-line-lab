@@ -1,20 +1,19 @@
-# PARS LINE LAB v0.3.4
+# PARS LINE LAB v0.4.1
 
-## v0.3.4 – PID-benzeri sensör kontrollü hareket
-- Robotun ön (burun) tarafı, tekerleklerin karşı tarafı olarak sensör dizisinin konumunda örneklenir.
-- Robot artık waypoint interpolasyonu ile pistte zorla ilerletilmez. Sensör çizgi yakınlık değerleri bir ağırlıklı hata üretir.
-- Eğitsel P/I/D-benzeri kontrol, diferansiyel motor hızlarını ayarlayarak robot yönünü düzeltir.
-- Çizgi kaybında son algılama yönünde basit arama davranışı uygulanır.
-- RPM, teker çapı, şasi genişliği, simülasyon hızı ve sensör sayısı model hareketini etkiler.
+Çizgi izleyen robot simülatörü.
 
-## GitHub/Vercel
-GitHub repository'ye bu proje dosyalarını yükleyip commit edin. Vercel bağlı repository'den otomatik deploy edecektir.
+## v0.4.1
+- Sensör örnekleme robotun ilerleme yönünde, sensör barı boyunca dik yerleştirildi.
+- Çizgi algılayan sanal sensör LED'leri yeşil; algılamayanlar kırmızı.
+- PID-benzeri diferansiyel sürüşün yön/polaritesi düzeltildi.
+- Başlangıç PID değerleri otomatik olarak güvenli alt sınırlarla ayarlanır.
+- Çizgi kaybında son algılanan yönle arama davranışı.
 
-## Çalıştırma
-`npm install` ardından `npm run dev`.
+## Yayınlama
+GitHub repository'de dosyaları güncelleyin; Vercel bağlı repository üzerinden otomatik deploy yapar.
 
-> Kontrol modeli eğitim amaçlı yaklaşık bir diferansiyel sürüş/PID-benzeri modeldir; gerçek robot dinamiklerinin kalibre edilmiş birebir simülasyonu değildir.
-
-
-### v0.3.4
-- Sensör örnekleme ve LED overlay konumu, robot görselindeki gerçek mavi sensör barına hizalandı.
+## Yerel geliştirme
+```bash
+npm install
+npm run dev
+```
