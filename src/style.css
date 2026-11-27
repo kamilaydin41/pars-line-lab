@@ -48,3 +48,25 @@ canvas{touch-action:none;cursor:grab}canvas:active{cursor:grabbing}.uploadLabel{
   .stage > aside > .panel:has(.pidGraph) { grid-column: auto; }
 }
 .pidTerms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0 14px}.pidTerms div{background:#0b1118;border:1px solid #263340;border-radius:9px;padding:8px 6px;display:flex;flex-direction:column;gap:4px;min-width:0}.pidTerms span{font-size:10px;color:#94a3b8}.pidTerms b{font-size:12px;color:#5eead4;overflow-wrap:anywhere}@media(max-width:520px){.pidTerms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* v0.4.10: three-column settings layout under the simulator and live sensor array */
+.stage > aside {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #263340;
+  align-items: start;
+}
+.stage > aside > .panel { margin: 0; height: fit-content; min-width: 0; }
+.stage > aside > .panel:first-child { grid-column: 1 / -1; }
+.stage > aside > .panel:has(.codeEditor) { grid-column: 1 / -1; }
+.stage > aside > .panel.info { grid-column: 1 / -1; }
+.stage > aside > .panel h3 { padding-bottom: 8px; border-bottom: 1px solid #263340; }
+@media(max-width: 1050px) { .stage > aside { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 620px) {
+  .stage > aside { grid-template-columns: 1fr; }
+  .stage > aside > .panel:first-child, .stage > aside > .panel:has(.codeEditor), .stage > aside > .panel.info { grid-column: auto; }
+}

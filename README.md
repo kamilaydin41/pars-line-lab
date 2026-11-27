@@ -1,14 +1,16 @@
-# PARS LINE LAB v0.4.9
+# PARS LINE LAB v0.4.10
 
-## PID kontrol güncellemesi
+## Üç sütunlu kontrol paneli
 
-PID, zaman aralığına (dt) bağlı ayrık kontrol olarak çalışır:
+- Simülasyon ve canlı sensör dizisi üstte kalır.
+- Simülasyon kontrol paneli tam genişlikte yer alır.
+- Pist, robot yerleşimi, sensör ve motor ayarları masaüstünde üç sütuna düzenlenir.
+- Özel kod editörü ve bilgilendirme alanı geniş yer kaplayacak şekilde düzenlenir.
+- 1050 px altında iki sütun, 620 px altında tek sütun düzenine geçilir.
 
-- **P:** anlık normalize çizgi hatası (`Kp * error`). Kp yükseldikçe düzeltme kuvveti artar; aşırı değer salınım yaratabilir.
-- **I:** hatanın zamana göre birikimi (`integral += error * dt`). Sürekli küçük sapmaları gidermeye yardım eder. Integral sınırlandırılır ve anti-windup uygulanır. Çizgi izleyen robotlarda genellikle küçük tutulması, hatta sıfırdan başlanması önerilir.
-- **D:** hata değişim hızını (`(error - previousError) / dt`) hesaplar; filtrelenerek ani sensör değişimlerinin motor komutlarına aşırı yansıması azaltılır.
+## PID
 
-PID terimleri motorlar arasındaki hız farkını belirler. Çıkış ±0.72 sınırına alınır. Simülatör PID terimlerini P/I/D/Çıkış olarak canlı gösterir.
+Önceki sürümün PID kontrol mantığı, sensör/motor/pist ayarları korunmuştur.
 
 ## Yayınlama
 
