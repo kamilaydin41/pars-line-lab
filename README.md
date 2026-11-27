@@ -52,3 +52,8 @@ npm run build
 - Merkezdeki okumalar PID integralini sıfırlar ve türev düzeltmesini kapatarak düz sürüşte birikmiş düzeltmenin devam etmesini önler.
 - Sensör hata deadband'i jitter'ı azaltacak şekilde genişletildi.
 - Sol/sağ motor RPM farkı, merkez hata sıfırken eşit teker hızına kompansasyon ile dengelenir.
+
+
+## v0.4.8
+
+Kontrol ve yapılandırma panelleri Canlı Sensör Dizisinin hemen altında, geniş ekranlarda iki sütunlu ve küçük ekranlarda tek sütunlu düzenle gruplandırıldı.
