@@ -1,4 +1,4 @@
-# PARS LINE LAB v0.4.5
+# PARS LINE LAB v0.4.6
 
 Çizgi izleyen robot eğitim simülatörü.
 
@@ -39,3 +39,9 @@ npm run build
 - 3, 5, and other sensor counts now use a normalized sensor-centroid error. The center sensor (or central pair) produces a straight-driving zero error when centered.
 - Sensor readings average a small pixel footprint for less fragile line detection.
 - Configuration panels are moved below the live sensor array.
+
+
+### v0.4.6
+- Sensor array sampling position is moved to a forward, near-center location on the robot, using rendered robot length as a scale reference.
+- Sensor array remains laterally centered for all supported sensor counts.
+- Sensor array span is clamped relative to robot width so higher sensor counts stay on the chassis.
